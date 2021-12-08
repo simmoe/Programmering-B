@@ -23,6 +23,10 @@ main{
     background-color:white;
     background-size:cover;
     position:relative;
+    display:grid;
+    place-items:center;
+    color:white;
+    padding:.5rem;
 }
 
 .lock{
@@ -37,6 +41,20 @@ main{
     font-size:4rem;
     z-index:5;
 }
+
+.openSlide{
+    animation: slide 1s forwards ease-in-out;
+}
+
+@keyframes slide{
+    from{
+        width:100%;
+    }
+    to{
+        width:0;
+    }
+}
+
 iframe{
     z-index:1;
 }
