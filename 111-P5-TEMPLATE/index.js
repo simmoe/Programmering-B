@@ -1,23 +1,12 @@
-function setup(){
-    frameRate(60)
-    createCanvas(windowWidth, windowHeight)
-    background('green')
-    select('#info').html('Sådan her skriver man noget i HTML dokumentet')
-}
+
+
+ function setup(){
+     createCanvas(windowWidth, windowHeight)
+     background('green')
+    }
 
 function draw(){
-    //mouseX mouseY frameCount map
+    let green = map(mouseX, 0, windowWidth, 0, 255)
+    stroke(0, green, 0)
+    ellipse(mouseX, mouseY, 20 )
 }
-
-function mousePressed(){
-    select('#info').html('Du klikkede')
-}
-
-function mouseReleased(){
-    select('#info').html('Du slap musen')
-}
-
-function keyPressed(event){
-    select('#info').html('Du trykkede: ' + event.key)
-}
-
