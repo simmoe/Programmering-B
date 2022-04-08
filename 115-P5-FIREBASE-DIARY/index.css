@@ -12,6 +12,7 @@ body{
     height:100vh;
     overflow:hidden;
 }
+
 header{
     position:fixed;
     height:14vh;
@@ -19,15 +20,27 @@ header{
     color:white;
     background-color:black;
     display:grid;
-    place-items:center;
+    grid-template-columns: 4fr 2fr;
+    align-items: center;
+    padding:2rem;
+    justify-content: space-between;
 }
 main{
     position:fixed;
     height:86vh;
-    top:10vh;
+    width:100vw;
+    top:14vh;
     padding:2rem;
+    display:grid;
+    place-items:center;
+}
+#words{
+    height:76vh;
+    width:80vw;
+    overflow: scroll;
 }
 #saveButton{
     font-weight:bold;
     padding:.3rem;
+    cursor: pointer;
 }

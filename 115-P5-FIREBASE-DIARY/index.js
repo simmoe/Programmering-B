@@ -8,6 +8,7 @@ let saveButton
 function setup(){
     //opret reference til html view
     htmlWords = select('#words')
+
     //opret reference til andre html elementer 
     saveButton = select('#saveButton')
     noCanvas()
@@ -20,6 +21,7 @@ function setup(){
             model = doc.data()
             //opdater view
             htmlWords.html(model.words)
+            htmlWords.elt.scrollTop = htmlWords.elt.scrollHeight
             htmlWords.input(()=>{
                 //console.log(htmlWords.html())
                 model.words = htmlWords.html()
@@ -33,3 +35,6 @@ function setup(){
     
 }
 
+function draw(){
+    //console.log(htmlWords.elt.scrollTop, htmlWords.elt.scrollHeight)
+}
