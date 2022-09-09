@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Roboto';
+}
+
+main{
+    height:100vh;
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding:4rem;
+    gap:.1rem;
+    overflow:hidden;
+}
+.card{
+    height:6rem;
+    width:100%;
+    background:  orange;
+    border-radius:1rem;
+}
+
+@keyframes anim{
+    from{
+        transform:translateX(200px);
+    }
+    to{
+        transform:translateX(0);
+    }
+}

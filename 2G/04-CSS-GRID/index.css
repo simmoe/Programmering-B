@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family:'Lato';
+}
+
+/* parent layout styrer hvor child elementerne skal placeres og hvor meget de skal fylde */
+.parent{
+    height:100vh;
+    width:100vw;
+    padding:1rem;
+    display:grid;
+    /* template columns fortæller hvordan child elementerne skal fordeles horisontalt */
+    grid-template-columns: repeat(6, 1fr);
+    gap:1rem;
+}
+
+.child{
+    background-color: orangered;
+    border: 1px dotted gray;
+    display:grid;
+    place-items:center;
+    color:white;
+    font-size:4rem;
+}

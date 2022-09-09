@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Palette+Mosaic&family=Roboto&display=swap');
+
+body{
+    background-color: orangered;
+    margin:0;
+    height:100vh;
+    width:100vw;
+    overflow:hidden;
+    display:grid;
+    place-items:center;
+    font-family: 'Palette Mosaic';
+}
+
+h1{
+    margin:0;
+    padding:2rem;
+    font-size:4rem;
+    text-align: center;
+}
+
+p{
+    font-size: 1.5rem;
+}
+
+.boks{
+    border:8px solid white;
+    width:50vw;
+    padding:2rem;
+    font-size:2rem;
+    color:white;
+}
+
+#speciel{
+    color:black;
+}

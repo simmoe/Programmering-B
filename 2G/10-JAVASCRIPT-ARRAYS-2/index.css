@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family:'Roboto';
+    scroll-behavior: smooth;
+}
+
+body{
+    height:100vh;
+    width:100vw;
+    background-image:url('./assets/film/dune.jpg');
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position:top left;
+    background-color: #222;
+}
+
+main{
+    height:200vh;
+}
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    display:grid;
+    height:8vh;
+    grid-template-columns:1fr 1fr;
+    justify-content: space-between;
+    align-items:center;
+    background:linear-gradient(#222, rgba(0,0,0,0));
+    color:white;
+}
+header img{
+    height:3rem;
+}
+
+.right, .left{
+    display:grid;
+    grid-auto-flow: column;
+    align-items: center;
+    gap:1rem;
+}
+
+.right img{
+    height:1.5rem;
+    stroke:white;
+}
+.left{
+    justify-content: left;
+    padding-left:1rem;
+}
+.right{
+    justify-content: right;
+    padding-right:1rem;
+}
+
+.dune{
+    width:30vw;
+    padding:2rem;
+    margin-left:1rem;
+    color:white;
+    background-color:rgba(0,0,0,.2);
+    border-radius:2rem;
+    margin-top:4rem;
+}
+.dune h1{
+    font-size:10rem;
+}
+.dune h2{
+    margin-bottom:1rem;
+}
+.dune p {
+    font-size:1.4rem;
+}
+
+.binge {
+    position:relative;
+}
+.binge h2{
+    color:white;
+    padding-left:3rem;
+    margin-top:3rem;
+}
+
+#bingelist{
+    display:grid;
+    grid-auto-flow: column;
+    overflow: hidden;
+    margin-top:1rem;
+    transition:.4s ease-in-out;
+}
+
+#arrow{
+    position:absolute;
+    top:6.5rem;
+    right:1rem;
+    height:3rem;
+}

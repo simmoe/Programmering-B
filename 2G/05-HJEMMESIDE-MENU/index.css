@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family:'Lato';
+}
+
+body{
+    height:100vh;
+    width:100vw;
+    display:grid;
+    grid-template-rows: 1fr 6fr 1fr;
+    background-image:url('./assets/1.jpg');
+    background-size:cover;
+    overflow:hidden;
+}
+
+
+main{
+    display:grid;
+    grid-auto-flow: column;
+    overflow:scroll;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    background-color:rgba(255, 255, 255, 0.5);
+}
+
+
+header{
+    background-color: black;
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:2rem;
+    padding:2rem;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.menu{
+    display:grid;
+    place-items:center;
+    color:white;
+    padding:1rem;
+    border:1px solid white;
+    border-radius:1rem;
+}
+
+
+.page{
+    width:100vw;
+    display:grid;
+    place-items:center;
+    scroll-snap-align: center;
+}
+
+.page div{
+    width:40vw;
+    border:1px solid white;
+    padding:2rem;
+    background:rgba(255, 255, 255, 0.5);
+}
+
+footer{
+    background-color:darkslategray;
+    color:white;
+    display:grid;
+    place-items:center;
+}
+
+@media screen and (max-width:800px) {
+    .page div{
+        width:90vw;
+    }
+    header{
+        gap:.2rem;
+    }
+}

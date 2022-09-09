@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Roboto';
+}
+
+main{
+    height:100vh;
+    background-color:#555;
+    display:grid;
+    grid-template-rows:repeat(3, 1fr);
+}
+
+#hours, #minutes, #seconds{
+    font-size: 2vh;
+    padding:0 1rem 1rem 0;
+    color:white;
+    display:grid;
+    align-items: end;
+    justify-content: end;
+    transition: all 1s ease-in-out;
+    border-top-right-radius: 1rem;
+}
+
+#hours{
+    background-color:magenta;
+}
+#minutes{
+    background-color:lightgreen;
+}
+#seconds{
+    background-color:lightskyblue;
+}

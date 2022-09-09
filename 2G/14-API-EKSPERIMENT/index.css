@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Roboto';
+}
+
+body{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(600px, 1fr));
+    gap:1rem;
+    padding:1rem;
+}
+
+img{
+    width:100%;
+}
+
+header{
+
+}
+main{
+
+}
+footer{
+    
+}
