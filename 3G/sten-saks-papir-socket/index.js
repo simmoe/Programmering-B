@@ -17,6 +17,7 @@ let readyPlayers = 0
 //al snak med klienterne sker på connection
 serverSocket.on('connection', socket => {
     console.log('ny spiller: ' + socket.id)
+
     //add players on connection
     if(players.length >= 2){
         console.log('der var ikke plads til: ' + socket.id)
@@ -41,7 +42,7 @@ serverSocket.on('connection', socket => {
 
     socket.on('disconnect', ()=>{
         players = players.filter( p => p.id != socket.id)
-        readyPlayers--
+        if(readyPlayers == 2) readyPlayers = 1
         serverSocket.emit('join', true)
     })
 })

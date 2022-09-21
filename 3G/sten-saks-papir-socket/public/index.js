@@ -1,4 +1,5 @@
 let clientSocket
+let currentPage = '#lobby'
 
 function setup(){
   noCanvas()
@@ -7,24 +8,28 @@ function setup(){
   //få besked om du er med eller om du må vente
   clientSocket.on('join', ok => {
     if(ok){
-      select('#name').addClass('show')
+      console.log('got ok to join, showing namepage')
+      shiftPage('#name')
     }else{
-      select('#reject').addClass('show')
+      shiftPage('#reject')
     }
   })
   select('#nameButton').mousePressed(()=>{
     if(select('#nameInput').value() != ''){
       clientSocket.emit('name', select('#nameInput').value())
-      select('#name').removeClass('show')
-      select('#lobby').addClass('show')
-      
+      shiftPage('#lobby')
     }else{
       confirm('indtast et navn')
     }
     clientSocket.on('play', ()=>{
-      select('#lobby').removeClass('show')
-      select('#play').addClass('show')
+      shiftPage('#play')
     })
   })
+}
+
+function shiftPage(pageId){
+  select(currentPage).removeClass('show')
+  select(pageId).addClass('show')
+  currentPage = pageId
 }
 
