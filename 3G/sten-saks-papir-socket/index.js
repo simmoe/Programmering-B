@@ -27,11 +27,10 @@ serverSocket.on('connection', socket => {
         socket.emit('join', true)        
     }
     socket.on('name', name => {
-        let thisPlayer = players.find( p => p.id == socket.id )
-        thisPlayer.name = name
-        console.log('denne spiller', thisPlayer)
+        players.find( p => p.id == socket.id ).name = name
         readyPlayers++
         console.log('ReadyPlayers', readyPlayers)
+        console.log(players)
         if(readyPlayers == 2){
             //start spil
             let player1 = players[0]
