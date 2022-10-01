@@ -20,44 +20,68 @@ serverSocket.on('connection', socket => {
 
     //tjek om der er plads til flere spillere 
     //hvis ikke, send join, false
-    //ellers tilføj spillere til players array
-    //og send join, true
+    if(players.length >= 2){
+        console.log('der var ikke plads til: ' + socket.id)
+        socket.emit('join', false)
+        socket.disconnect()
+    }else{
+        //ellers tilføj spillere til players array
+        players.push({ 'id':socket.id})
+        //og send join, true
+        socket.emit('join', true)        
+    }
     
     //modtag spillernavne
     socket.on('name', name => {
         console.log('Fik navn ', players, gotName)        
         //indsæt navnet i players array 
+        players.find( p => p.id == socket.id ).name = name
         //registrer at vi har modtaget et navn til - læg 1 til navnetæller
+        gotName ++
         //hvis vi har modtaget BEGGE navne, start spil 
+        if(gotName == 2){
+            serverSocket.emit('play', true)
+        } 
     })
 
     //modtag spillernes valg 
     socket.on('choice', choice => {
         console.log('Fik valg ', players, gotChoice)
         //indsæt valget i players array
+        players.find( p => p.id == socket.id ).choice = choice
         //registrer at vi har modtaget et valg til - læg en til valgtæller 
-        //hvis vi har modtaget begge valg, beregn vinder
-            //sæt winner = den første spiller
-            //tjek om spillerne har samme valg - sæt winner = draw
-            //tjek om spiller 1 har saks og den anden sten - sæt winner = players[1]
-            //tjek om spiller 1 har papir og den anden saks - sæt winner = players[1]
-            //tjek om spiller 1 har sten og den anden papir - sæt winner = players[1]
-        //send resultat 
+        gotChoice ++
+        //hvis vi har modtaget begge valg, beregn vinder 
+        if(gotChoice == 2){
+            let winner = players[0].name
+            if(players[0].choice == players[1].choice) winner = 'draw'
+            if(players[0].choice == 'scissor' && players[1].choice == 'stone') winner = players[1].name
+            if(players[0].choice == 'stone' && players[1].choice == 'paper') winner = players[1].name
+            if(players[0].choice == 'paper' && players[1].choice == 'scissor') winner = players[1].name
+            console.log('Sender resultat, vinder er ', winner)
+            serverSocket.emit('result', winner)
+        } 
     })
 
     //håndter disconnect - hvis en spiller lukker sin side
     socket.on('disconnect', ()=>{
         console.log('Player disconnected, updating arrays ')
         //fjern spilleren fra players array
+        players = players.filter( p => p.id != socket.id)
         //find ud af om der er flere spillere tilbage, og sæt navnetælleren
+        gotName = players.filter(p => p.name).length 
         //set valgtælleren til nul
+        gotChoice = 0
         //send eventuel spiller tilbage til start 
+        serverSocket.emit('join', true)
     })
 
     //håndter 'nyt spil' knap
     socket.on('restart', ()=>{
         console.log('Restarting game, same players ')
         //sæt valgtæller til 0 (vi har begge spilleres navn) 
+        gotChoice = 0
         //start spil
+        serverSocket.emit('play', true)
     })
 })
