@@ -1,29 +1,32 @@
 let clientSocket
 let currentPage = '#lobby'
+let nameInput, nameButton, rejectButton, timer, stone, scissor, paper, player1, player1Choice, player2, player2Choice,winner, restartButton
 
 function setup(){
   noCanvas()
+  initVariables()
+  //vis en side
+  shiftPage('#lobby')
   //log på serveren 
   clientSocket = io.connect()
-  //få besked om du er med eller om du må vente
-  clientSocket.on('join', ok => {
-    if(ok){
-      console.log('got ok to join, showing namepage')
+  //er vi velkomne til at spille?
+  clientSocket.on('welcome', okay => {
+    if(okay){
       shiftPage('#name')
     }else{
       shiftPage('#reject')
+      rejectButton.mousePressed(() => {
+        window.location.reload()
+      })
     }
   })
-  select('#nameButton').mousePressed(()=>{
-    if(select('#nameInput').value() != ''){
-      clientSocket.emit('name', select('#nameInput').value())
-      shiftPage('#lobby')
+  //når navnet bliver indtastet og der trykkes på OK
+  nameButton.mousePressed( () => {
+    if(nameInput.value() != ''){
+      clientSocket.emit('name', nameInput.value())
     }else{
-      confirm('indtast et navn')
+      confirm('Skriv dit navn for fanden')
     }
-    clientSocket.on('play', ()=>{
-      shiftPage('#play')
-    })
   })
 }
 
@@ -31,5 +34,22 @@ function shiftPage(pageId){
   select(currentPage).removeClass('show')
   select(pageId).addClass('show')
   currentPage = pageId
+}
+
+function initVariables(){
+  //let nameInput, nameButton, rejectButton, timer, stone, scissor, paper, player1, player1Choice, player2, player2Choice,winner, restartButton
+  nameInput = select('#nameInput')
+  nameButton = select('#nameButton')
+  rejectButton = select('#rejectButton')
+  timer = select('#timer')
+  stone = select('#stone')
+  scissor = select('#scissor')
+  paper = select('#paper')
+  player1 = select('#player1')
+  player2 = select('#player2')
+  player1Choice = select('#player1Choice')
+  player2Choice = select('#player2Choice')
+  winner = select('#winner')
+  restartButton = select('#restartButton')
 }
 

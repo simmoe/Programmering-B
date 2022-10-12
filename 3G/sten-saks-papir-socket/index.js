@@ -10,39 +10,51 @@ const server = app.listen(port, ()=>{
 const io = require('socket.io')
 const serverSocket = io(server)
 
-
 let players = []
-let readyPlayers = 0
 
-//al snak med klienterne sker på connection
+let numPlayers = 0
+let numNames = 0
+let numChoice = 0
+
+//Der kommer en ny klient - og serveren møder den her
 serverSocket.on('connection', socket => {
-    console.log('ny spiller: ' + socket.id)
-
-    //add players on connection
-    if(players.length >= 2){
-        console.log('der var ikke plads til: ' + socket.id)
-        socket.emit('join', false)
+    console.log('ny player, id: ' + socket.id)   
+    numPlayers++
+    console.log('Der er nu: ' + numPlayers + ' spillere')   
+    //er der plads tiln flere spillere?
+    if(numPlayers <= 2){
+        //hvis ja, så lægger vi spilleren til i arrayet
+        players[socket.id] = {
+            'id':socket.id
+        }
+        //og sender en besked om han/hun/hen er inde og med 
+        socket.emit('welcome', true)
     }else{
-        players.push({'id': socket.id})
-        socket.emit('join', true)        
+        //ellers sender vi en afvisning
+        console.log('Der var sgu ikke plads, vi smider spilleren ud igen')
+        socket.emit('welcome', false)
+        //vi skal lige huske at tælle en spiller mindre 
+        numPlayers--
+        console.log('Nu er der ' + numPlayers + ' tilbage')
+        //og disconnecter denne socket 
+        socket.disconnect()
     }
-    socket.on('name', name => {
-        let thisPlayer = players.find( p => p.id == socket.id )
-        thisPlayer.name = name
-        console.log('denne spiller', thisPlayer)
-        readyPlayers++
-        console.log('ReadyPlayers', readyPlayers)
-        if(readyPlayers == 2){
-            //start spil
-            let player1 = players[0]
-            let player2 = players[1]
-            serverSocket.emit('play')
+    //når vi modtager navne fra spillerne
+    socket.on('name', message => {
+        //lægger vi en egenskab "name" til spilleren i arrayet
+        players[socket.id].name = message
+        numNames++
+        if(numNames == 2){
+            serverSocket.emit('play', true)
         }
     })
 
-    socket.on('disconnect', ()=>{
+    socket.on('disconnect', socket => {
+        numPlayers--
+        console.log('Ups, der var en spiller der smuttede')
+        console.log('Nu er der ' + numPlayers + ' tilbage')        
+        //fjern denne spiller fra arrayet med spillere 
         players = players.filter( p => p.id != socket.id)
-        if(readyPlayers == 2) readyPlayers = 1
-        serverSocket.emit('join', true)
+        console.log(players)
     })
 })
