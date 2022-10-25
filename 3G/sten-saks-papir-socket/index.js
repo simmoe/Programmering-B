@@ -43,7 +43,10 @@ serverSocket.on('connection', socket => {
     socket.on('name', message => {
         //lægger vi en egenskab "name" til spilleren i arrayet
         players[socket.id].name = message
+        //tæl hvor mange navne vi har fået
         numNames++
+        //log
+        console.log('Vi fik et navn - nu har vi ' + numNames)
         if(numNames == 2){
             serverSocket.emit('play', true)
         }
