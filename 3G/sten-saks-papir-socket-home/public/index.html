@@ -22,12 +22,12 @@
         <div class="picture">😢</div>
         <button id="rejectButton">Klik her for at prøve igen</button>
     </div>
-    <div class="page " id="lobby">
-        <div class="title">Venter på spillere</div>
+    <div class="page show" id="lobby">
+        <div class="title" id="lobbyText">Venter på spillere</div>
         <div class="lds-circle"><div></div></div>
     </div>
     <div class="page " id="play">
-        <div class="title">Vælg din hånd</div>
+        <div class="title">Vælg din hånd <span id='myName'></span></div>
         <div class="timer" id="timer">10</div>
         <div class="hands">
             <div class="hand" id="stone">
@@ -56,7 +56,7 @@
         <div class="title">Vinder</div>
         <div class="timer" id="winner">Allan</div>
         <div class="picture">🎉</div>
-        <button id="restart">Spil igen</button>
+        <button id="restartButton">Spil igen</button>
     </div>
 
     <script src="index.js"></script>
