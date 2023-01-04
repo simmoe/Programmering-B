@@ -1,22 +1,17 @@
 //opret server med express
 const express = require('express')
-//oprett variabel APP som indeholder serverbiblioteket 
 const app = express()
-//vælg en port  
 const port = 4444
-//sig at appen skal server mappen public
 app.use('/', express.static('public'))
-//sæt appen ti at lytte poå porten
 const server = app.listen(port, ()=>{
     console.log('server lytter på adressen: http://localhost:' + port)
 })
-//opret en socket - hent et socket bibliotek ind i variablen IO
+//opret en socket 
 const io = require('socket.io')
-//serveren hoved walkie talkie som tusinder af klienter kan snakke gennem   
 const serverSocket = io(server)
-//serverens variabler til at holde styr på hvorhenne i spillet vi er 
+
 let gotName = 0, gotChoice = 0
-//players arrayet er serverens sted til at holde styr på de to spillere
+
 let players = []
 
 //al snak med klienterne sker på connection
@@ -26,10 +21,9 @@ serverSocket.on('connection', socket => {
     if(players.length >= 2){
         console.log('der var ikke plads til: ' + socket.id)
         socket.emit('join', false)
-        //luk spillerens socket 
         socket.disconnect()
     }else{
-        //ellers tilføj spilleren til players array
+        //ellers tilføj spillere til players array
         players.push({ 'id':socket.id})
         //og send join, true
         socket.emit('join', true)        
@@ -37,19 +31,12 @@ serverSocket.on('connection', socket => {
         console.log('Der er nu ' + players.length + ' spillere')
         console.log('Hvoraf ' + players.filter(p=>p.name).length + ' har indtastet deres navn')    
     }
-
-
+    
     //modtag spillernavne
     socket.on('name', name => {
-        //find returnerer DET FØRSTE element som lever op til en betingelse 
         let thisPlayer = players.find( p => p.id == socket.id )
         //indsæt navnet i objektet i players array 
         thisPlayer.name = name
-        //hvad hvis der to med det samme navn? 
-        let otherPlayer = players.find( p => p.id != socket.id)
-        if( otherPlayer.name == thisPlayer.name){
-            thisPlayer.name = 'Kartoffel-' + thisPlayer.name
-        }
         //registrer at vi har modtaget et navn til - læg 1 til navnetæller
         gotName ++
         console.log('Fik navn: ' + name, ' Vi har nu ' + gotName + ' navn(e)')        
