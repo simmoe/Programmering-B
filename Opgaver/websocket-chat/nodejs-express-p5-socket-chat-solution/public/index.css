@@ -39,9 +39,13 @@
 #chatBox{
     padding:4rem;
 }
+
+
 .me{
     text-align: right;
     color:green;
+    /* format .me as a speech bubble */
+
 }
 #message {
     height:2rem;

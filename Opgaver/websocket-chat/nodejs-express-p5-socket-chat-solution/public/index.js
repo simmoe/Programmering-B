@@ -13,9 +13,10 @@ function setup(){
     //modtag array med chat historik
     clientSocket.on('chatMessage', chatMessage => {
         console.log('modtog chatbesked: ', chatMessage)
-        let p = createElement('p', chatMessage)
+        let p = createElement('p', chatMessage).addClass('chatMessage')
         select('#chatBox').child(p)
     })
+
     select('#okButton').mousePressed(()=>{
         if(select('#nameInput').value() !=''){
             select('#namePage').addClass('hidden')
@@ -23,6 +24,9 @@ function setup(){
             myName = select('#nameInput').value()
         }
     })
+
+
+
     select('#sendButton').mousePressed(()=>{
         if(select('#chatMessage').value() !=''){
             let p = createElement('p', myName + ': ' + select('#chatMessage').value())
