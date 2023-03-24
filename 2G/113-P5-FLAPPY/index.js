@@ -32,7 +32,7 @@ function setup(){
 
 function showRect(){
     rect(rectX, rectY, rectW, rectH)
-    rect(rectX, 0, rectW, rectH)
+    //rect(rectX, 0, rectW, rectH)
 }
 
 function updateRect(){
