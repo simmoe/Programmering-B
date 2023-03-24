@@ -9,8 +9,9 @@ let velocity = 0
 let updrift = 25
 
 //forhindringens koordinater og størrelse
-let wallX, wallY, wallW, wallH
-let wallSpeed = 10
+let wallW = 40 
+let wallX, wallY, wallH
+let wallSpeed = 5
 
 //point
 let score = 0
@@ -23,7 +24,6 @@ function setup(){
     //spiller dumper ned på midten af skærmen
     playerX = windowWidth/2
     playerY = playerWidth/2
-    wallW = 20
     wallH = 100
     wallX = windowWidth
     wallY = windowHeight - wallH
@@ -78,6 +78,7 @@ function collissionOrPoints(){
 
 function draw(){
     background('green')
+    noStroke()
     showPlayer()
     updatePlayer()
     showWall()
