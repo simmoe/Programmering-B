@@ -13,9 +13,9 @@ function getActivity () {
         .then( json => {
             console.log(json)
             //Vi kan enten udskrive noget data direkte i konsollen
-            console.log(json.activity)
-            console.log(json.type)
-            console.log(json.participants)
+            console.log("Aktiviteten er: " + json.activity)
+            console.log("Type: " + json.type)
+            console.log("Antal deltagere: " + json.participants)
             //eller kalde en funktion som vi selv har lavet, der kan udskrive data på hjemmesiden
             createCard(json)
         })
@@ -24,10 +24,10 @@ function getActivity () {
 //Funktionen createCard() tager et JSON objekt som parameter 
 function createCard(obj) {
     document.querySelector('#title').innerHTML = obj.activity
-    document.querySelector('#participants').innerHTML = obj.participants
-    document.querySelector('#acc').innerHTML = obj.accessibility
-    document.querySelector('#price').innerHTML = obj.price
-    document.querySelector('#cat').innerHTML = obj.type
+    document.querySelector('#participants').innerHTML = "Antal deltagere: " + obj.participants
+    document.querySelector('#acc').innerHTML = "Tilgængelighed: " + obj.accessibility
+    document.querySelector('#price').innerHTML = "Pris: " + obj.price
+    document.querySelector('#cat').innerHTML = "Type: " + obj.type
 }
 
 //vi kalder funktionen getActivity() for at hente data første gang, når siden er loadet
