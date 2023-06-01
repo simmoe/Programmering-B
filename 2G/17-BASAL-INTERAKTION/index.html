@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js" integrity="sha512-N4kV7GkNv7QR7RX9YF/olywyIgIwNvfEe2nZtfyj73HdjCUkAfOBDbcuJ/cTaN04JKRnw1YG1wnUyNKMsNgg3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Brugerinteraktion</title>
+</head>
+<body>
+    <header>
+    </header>
+    <main>
+        <h2>Skriv og vælg de rigtige ord, så de passer ind i teksten</h2>
+        <p>Der var engang en mand, som var gift med en sød kone. De havde 3...</p>
+        <input type="text" id="insertWord">
+        <p>En dag gik manden en tur i skoven. Han...</p>
+        <select name="dropWord" id="dropWord">
+            <option value="kig">kigger</option>
+            <option value="så">så</option>
+            <option value="find">find</option>
+        </select>
+        <p>efter sin hund, men kunne ikke lige finde den</p>
+        <button id="checkWords">Tjek svar</button>
+
+        <p id="resultat"></p>
+    </main>
+    <footer>
+    </footer>
+    
+    <script src="index.js"></script>
+</body>
+</html>
