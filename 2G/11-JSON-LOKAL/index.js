@@ -1,30 +1,50 @@
+//Dette program henter data fra en lokal JSON fil og viser det på en hjemmeside
+//Funktionen filterData() tager en string som parameter og returnerer et array med de elementer som indeholder den string
+
+//Dette er en global variabel som skal indeholde data fra JSON filen
 let data
 
-//ASYNKRON FUNKTION
+//ASYNKRON FUNKTION som henter data fra en lokal JSON fil
 fetch('./data/birds.json')
-    //get the response object and parse it into json()
+    //modtag response fra serveren og konverter til JSON 
     .then( res => res.json() )
-    //when the parsing is done we get the json object into a variable 
+    //når data er konverteret til JSON, så kan vi arbejde med det 
     .then( json => {
+        //vi starter lige med at udskrive json i konsollen
         console.log(json)
+        //så gemmer vi json i en global variabel, så vi kan bruge den senere
         data = json.birds
+        //vi indsætter "description" fra json i h1 tagget med id: title
         document.querySelector('#title').innerHTML = json.description
+        //vi laver et loop, der kører igennem alle elementer i json.birds
         json.birds.map( bird => {
+            //og for hvert element i json.birds kalder vi funktionen newCard() og sender elementet med som parameter
             newCard(bird)
         } )
 
     })
 
 
-    document.querySelector('#input').addEventListener('input', ()=>{
-        let q = document.querySelector('#input').value
 
-        let result = data.filter( 
-            bird => bird.family.includes(q) 
-            ||  bird.members.join().includes(q) 
-        )
+    //dette er en funktion som tager en string og et array som parameter, og returnerer et array med de elementer som indeholder den string
+    function filterArray(str, arr){
+        //filter() er en indbygget funktion i JavaScript, der filtrerer et array
+        let resultArray = arr.filter(
+            //filter() tager en funktion som parameter, og denne funktion sammenligner om hvert element i arrayet indeholder den string som er sendt med som parameter
+            function (bird)  {
+                if(bird.family.includes(str)){
+                    return true
+                }                
+            }
+        )      
+        return resultArray  
+    }
+
+    document.querySelector('#input').addEventListener('input', function(){
+        let q = document.querySelector('#input').value
+        let filterBirds = filterArray(q, data)
         document.querySelector('main').innerHTML = ''
-        result.map( bird => newCard(bird) )
+        filterBirds.map( bird => newCard(bird) )
     })
 
 
