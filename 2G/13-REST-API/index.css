@@ -13,7 +13,7 @@ body{
 header{
     display:grid;
     place-items:center;
-    height:12vh;
+    height:10vh;
     background:black;
     color:white;
     text-shadow: 0 0 12px white;
@@ -25,12 +25,12 @@ h1{
 main{
     display:grid;
     place-items:center;
-    height:80vh;
+    height:70vh;
 }
 
 #activity{
     width:80vw;
-    height:60vh;
+    height:50vh;
     border:1px solid white;
     background:lightgray;
     border-radius:1rem;
@@ -39,7 +39,7 @@ main{
 }
 
 footer{
-    height:8vh;
+    height:20vh;
     display: grid;
     place-items:center;
 }
